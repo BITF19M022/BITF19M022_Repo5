@@ -77,7 +77,6 @@ public class DBHandler extends SQLiteOpenHelper {
 
     public void updateEmployee(Employee emp)
     {
-
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
@@ -87,6 +86,14 @@ public class DBHandler extends SQLiteOpenHelper {
 
         db.update(Paramters.TABLE_NAME, values, Paramters.KEY_ID + " = ?",
                   new String[]{String.valueOf(emp.getEmpID())});
+        db.close();
+    }
+
+    public void deleteEmployee(Employee emp)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(Paramters.TABLE_NAME, Paramters.KEY_ID + " = ?",
+                new String[]{String.valueOf(emp.getEmpID())});
         db.close();
     }
 }
